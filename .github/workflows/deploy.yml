@@ -21,18 +21,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set up Rust toolchain
-        uses: dtolnay/rust-toolchain-action@stable
+      - name: Set up Rust
+        uses: dtolnay/setup-rust@v1
+        with:
+          toolchain: stable
 
       - name: Install wasm-pack
         run: |
-          curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+          cargo install wasm-pack || true
+          echo "wasm-pack version: $(wasm-pack --version)"
 
       - name: Build WASM (wasm-pack)
         run: |
           wasm-pack build --target web --out-dir pkg
-          # ensure index.html is present in the published directory
-          # if your index.html is at repo root, copy it into pkg for publishing:
           if [ -f index.html ] && [ ! -f pkg/index.html ]; then cp index.html pkg/; fi
 
       - name: Setup Pages
