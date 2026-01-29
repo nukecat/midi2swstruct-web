@@ -130,7 +130,7 @@ transform: scale(1.03);
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("images/nukcat.png");
+    background-image: url("../images/nukcat.png");
     background-repeat: repeat;
     background-size: 4em;
     background-position: center;
