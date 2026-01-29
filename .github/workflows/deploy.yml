@@ -26,6 +26,9 @@ jobs:
         # This compiles your Rust into a /pkg folder with JS wrappers
         run: wasm-pack build --target web
 
+      - name: Disable Jekyll
+        run: touch .nojekyll
+
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
