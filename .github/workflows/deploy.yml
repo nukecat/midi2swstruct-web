@@ -29,5 +29,6 @@ jobs:
       - name: Upload to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: . # The folder where your index.html and /pkg live
-          branch: gh-pages # This creates a separate branch for the website
+          folder: .        # Deploy the whole root
+          branch: gh-pages # To this branch
+          clean: true      # This ensures the build is fresh
