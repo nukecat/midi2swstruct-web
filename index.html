@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>midi2swstruct-web</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script type="module" src="/js/main.js"></script>
+<script type="module" src="/js/collapsible.js"></script>
+</head>
+
+<body>
+<div class="bar">
+    <div class="left">
+        <h4>midi2swstruct</h4>
+    </div>
+    <div class="center">
+        <h4>webpv0.1.0-libv0.2.11</h4>
+    </div>
+</div>
+<div class="container">
+    <div class=left-side-panel></div>
+    <div class="content">
+        <h1>Welcome</h1>
+        <p>This is a web version of midi2swstruct tool. It can convert <b>MIDI</b> files into <b>Sandbox World</b> <b>.structure</b> files. The generated structure includes a music player with encoded MIDI data, playable within Sandbox World.</p>
+        <div class="content-box" id="midi2swstruct-widget">
+            <label class="drop-zone" style="width: 100%">
+                Drop MIDI file here, or click to upload.
+                <input style="display: none" type="file" id="file-input" accept=".mid,.midi" />
+            </label>
+            <p style="text-align: center;">
+                <sub><b><span class="selected-file-info">Current file: None</span></b></sub>
+            </p>
+
+            <div class="collapsible-container">
+                <button class="collapsible-toggle collapsed">Options </button>
+                <div class="collapsible-content collapsed">
+                    <div class="flex-column box">
+                        <div class="option-row">
+                            <label for="min-pitch">Min Pitch:</label>
+                            <input type="range" id="min-pitch" min="0" max="127" value="27">
+                            <span id="min-pitch-value">27</span>
+                        </div>
+                        <div class="option-row">
+                            <label for="max-pitch">Max Pitch:</label>
+                            <input type="range" id="max-pitch" min="0" max="127" value="111">
+                            <span id="max-pitch-value">111</span>
+                        </div>
+                        <div class="option-row">
+                            <label for="min-velocity">Min Velocity:</label>
+                            <input type="range" id="min-velocity" min="0" max="127" value="1">
+                            <span id="min-velocity-value">1</span>
+                        </div>
+                        <div class="option-row">
+                            <label>Repeat:</label>
+                            <input type="checkbox" id="repeat">
+                        </div>
+                        <div class="option-row">
+                            <label>Notes per Value:</label>
+                            <input type="number" id="notes-per-value" min="1" max="24" value="24">
+                        </div>
+                        <div class="option-row">
+                            <label>Max Events per Function:</label>
+                            <input type="number" id="max-events-per-func" min="1" value="1024">
+                        </div>
+                        <button class="btn" id="reset-btn">Reset Defaults</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn accept" id="convert-btn">Convert and Download</button>
+            <p id="status" style="text-align:center;">Idle</p>
+        </div>
+        <h2>How it works?</h2>
+        <ol>
+            <li>Parses MIDI file and collects note events across all tracks.</li>
+            <li>Filters notes by pitch and velocity.</li>
+            <li>Encodes note changes into a compressed function-based format.</li>
+            <li>Generates Sandbox World building with math blocks which contain data.</li>
+            <li>Outputs a .structure file ready for import.</li>
+        </ol>
+    </div>
+    <div class=right-side-panel></div>
+</div>
+<div class="bar">
+    <div class="right">
+        made by <b>nukcat</b>
+    </div>
+</div>
+</body>
+
+</html>

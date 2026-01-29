@@ -1,0 +1,418 @@
+/* ==========================
+ *   Base Styles
+ *   ========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #3f3f3f;
+    --secondary: #3F4F44;
+    --accent: #3C4940;
+    --background: #2f2f2f;
+    --shadow: black;
+    --text: #eee;
+    --accept-button: green;
+    --hover-button: #999;
+    --reject-button: red;
+    --button-text: #fff;
+    --dropbox-empty: rgba(127,127,127,0.25);
+    --dropbox-hover: rgba(255,255,255,0.25);
+    --dropbox-has-file: rgba(110,255,110,0.25);
+}
+
+body, html {
+    font-family: sans-serif;
+    background-color: var(--background);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+p {
+    line-height: 1.5;
+    margin: 0 0 1em 0;
+    font-size: 1rem;
+}
+
+ol {
+    list-style-type: decimal;
+    padding-left: 40px;
+    margin: 0 0 1em 0;
+}
+
+li {
+    margin: 0.3em 0;
+}
+
+/* ==========================
+ *   Buttons
+ *   ========================== */
+.btn {
+    display: inline-block;
+    padding: 0.5em 1.2em;
+    color: var(--button-text);
+    background-color: var(--primary);
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    box-shadow: 0 0 1em var(--shadow);
+}
+
+.btn:hover {
+    background-color: var(--hover-button);
+}
+
+.accept {
+    background-color: var(--accept-button);
+}
+
+#convert-btn {
+margin-top: 1em;
+width: 100%;
+padding: 0.6em 0;
+font-size: 1rem;
+border-radius: 0.8em;
+background-color: var(--accent);
+color: var(--button-text);
+font-weight: 600;
+box-shadow: 0 0 1em var(--shadow);
+cursor: pointer;
+transition: background 0.2s, transform 0.1s;
+}
+
+#convert-btn:hover {
+background-color: #5ebd5e;
+transform: scale(1.03);
+}
+
+/* ==========================
+ *   Bars / Layout
+ *   ========================== */
+.bar {
+    z-index: 1;
+    width: 100%;
+    height: 2em;
+    box-shadow: 0 0 1em var(--shadow);
+    background-color: var(--background);
+    color: var(--text);
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.left { margin-right: auto; }
+.right { margin-left: auto; }
+.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1;
+    isolation: isolate;
+}
+
+.container:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/images/nukcat.png");
+    background-repeat: repeat;
+    background-size: 4em;
+    background-position: center;
+    filter: contrast(1.25) saturate(0) brightness(0.25);
+    z-index: -1;
+}
+
+.left-side-panel,
+.right-side-panel {
+    width: 20%;
+}
+
+.content {
+    width: 100%;
+    padding: 1em 3em;
+    background-color: var(--primary);
+    color: var(--text);
+    box-shadow: 0 0 1em var(--shadow);
+}
+
+.content-box {
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+    box-shadow: inset 0 0 0.5em var(--shadow);
+}
+
+/* ==========================
+ *   Drop Zone
+ *   ========================== */
+.drop-zone {
+    border: 3px dashed var(--dropbox-empty);
+    border-radius: 1em;
+    padding: 2em;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+/* ==========================
+ *   Slider
+ *   ========================== */
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.option-row label {
+    flex: 0 0 120px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.option-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 0.8em;
+    border-radius: 0.5em;
+    background: var(--dropbox-empty);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.option-row input[type="range"]:hover {
+    background: var(--dropbox-hover);
+}
+
+.option-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0.5em var(--shadow);
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+}
+
+.option-row input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #7fff7f;
+}
+
+.option-row input[type="range"]::-moz-range-thumb {
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0.5em var(--shadow);
+    cursor: pointer;
+}
+
+.option-row span {
+    flex: 0 0 40px;
+    text-align: right;
+    color: var(--text);
+    font-weight: bold;
+}
+
+/* ==========================
+ * Collapsible
+ * ========================== */
+
+.collapsible-container {
+    width: 100%;
+}
+
+/* Toggle button styled like text */
+.collapsible-toggle {
+    background: none;
+    border: none;
+    font-weight: 600;
+    color: #eee;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s;
+    padding: 0.5em 0;
+}
+
+.collapsible-toggle:hover {
+    color: #2c3930; /* accent color */
+}
+
+.collapsible-toggle::after {
+    content: "\25BC"; /* ▼ */
+    display: inline-block;
+    margin-left: 0.3em;
+    transition: transform 0.3s ease;
+}
+
+/* Rotated arrow when collapsed */
+.collapsible-toggle.collapsed::after {
+    transform: rotate(-90deg);
+}
+
+/* Collapsible panel */
+.collapsible-content {
+    overflow: hidden;
+    max-height: 0px; /* start collapsed */
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: #eee;
+}
+
+/* Hidden state */
+.collapsible-content.collapsed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* ==========================
+ *   Checkbox
+ *   ========================== */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1.4em;
+    height: 1.4em;
+    border: 2px solid var(--dropbox-empty);
+    border-radius: 0.3em;
+    background-color: var(--background);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.35em;
+    height: 0.7em;
+    border: solid var(--button-text);
+    border-width: 0 0.15em 0.15em 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+input[type="checkbox"]:hover {
+    box-shadow: 0 0 0.5em var(--accent);
+}
+
+/* ==========================
+ *   Number Input Fixes
+ *   ========================== */
+/* Chrome, Safari, Edge */
+/* Remove browser spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+
+    width: 5em;
+    padding: 0.35em 0.4em;
+    border-radius: 0.5em;
+
+    border: 1px solid var(--dropbox-empty);
+    background-color: var(--background);
+    color: var(--text);
+
+    font-weight: bold;
+    text-align: center;
+
+    box-shadow: inset 0 0 0.5em var(--shadow);
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    /* alignment fix */
+    line-height: 1.2;
+    vertical-align: middle;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    box-shadow: 0 0 0.6em var(--accent) inset;
+}
+
+/* ==========================
+ *   Status
+ *   ========================== */
+#status {
+    margin: 1em 0 0 0;
+    text-align: center;
+    font-weight: bold;
+    color: var(--text);
+}
+
+/*
+ Other
+ */
+
+/* Flex utility class */
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em; /* spacing between children */
+}
+
+.box {
+    background-color: var(--background);
+    box-shadow: 0 0 1em var(--shadow) inset;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.option-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.option-row > label {
+    font-weight: 600;
+    color: var(--text);
+    user-select: none;
+}
+
+/* ==========================
+ *   Media Queries
+ *   ========================== */
+@media (orientation: portrait) {
+    .left-side-panel,
+    .right-side-panel {
+        display: none;
+    }
+}
