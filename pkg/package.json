@@ -1,0 +1,15 @@
+{
+  "name": "midi2swstruct-web",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "midi2swstruct_web_bg.wasm",
+    "midi2swstruct_web.js",
+    "midi2swstruct_web.d.ts"
+  ],
+  "main": "midi2swstruct_web.js",
+  "types": "midi2swstruct_web.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
