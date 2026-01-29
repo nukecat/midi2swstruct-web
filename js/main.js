@@ -1,4 +1,4 @@
-import init, { convert_midi_to_structure } from '../pkg/midi2swstruct_web.js';
+import init, { convert_midi_to_structure } from 'pkg/midi2swstruct_web.js';
 
 const DEFAULTS = {
     minPitch: 27,
