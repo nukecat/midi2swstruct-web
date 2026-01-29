@@ -34,7 +34,7 @@ async function setup() {
     const statusEl = document.getElementById("status");
     const fileInfoEl = document.querySelector(".selected-file-info");
 
-    // Update slider values dynamically
+    // Update slider values dynamically.
     ["min-pitch", "max-pitch", "min-velocity"].forEach(id => {
         const input = document.getElementById(id);
         const span = document.getElementById(`${id}-value`);
