@@ -1,58 +1,33 @@
-name: Deploy GitHub Pages
+name: Deploy Rust WASM to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ main ] # Runs every time you push to main
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up Rust
-        uses: actions-rs/toolchain@v1
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          profile: minimal
-          override: true
+          targets: wasm32-unknown-unknown
 
       - name: Install wasm-pack
-        run: |
-          cargo install wasm-pack || true
-          echo "wasm-pack version: $(wasm-pack --version)"
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-      - name: Build WASM (wasm-pack)
-        run: |
-          wasm-pack build --target web --out-dir pkg
-          if [ -f index.html ] && [ ! -f pkg/index.html ]; then cp index.html pkg/; fi
+      - name: Build WASM
+        # This compiles your Rust into a /pkg folder with JS wrappers
+        run: wasm-pack build --target web
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: ./pkg
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: . # The folder where your index.html and /pkg live
+          branch: gh-pages # This creates a separate branch for the website
