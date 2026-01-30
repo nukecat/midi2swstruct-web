@@ -15,7 +15,10 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
-          components: wasm-pack
+
+      - name: Install wasm-pack
+        run: |
+          curl https://drager.github.io/wasm-pack/installer/init.sh -sSf | sh
           
       - name: Build site
         run: |
