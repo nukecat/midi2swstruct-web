@@ -27,6 +27,11 @@ jobs:
       - name: Prepare site folder
         run: |
           mkdir site
+          mkdir site/pkg
+          mkdir site/js
+          mkdir site/images
+          mkdir site/css
+          
           rm pkg/.gitignore
           cp -r pkg/* site/pkg/
           cp index.html site/
