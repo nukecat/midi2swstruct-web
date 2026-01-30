@@ -1,37 +1,64 @@
-name: Deploy Rust WASM to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # Runs every time you push to main
-
-permissions:
-  contents: write
+    branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
+          
+      - name: Build site
+        run: |
+          wasm-pack build --target web
 
-      - name: Install wasm-pack
-        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-
-      - name: Build WASM
-        # This compiles your Rust into a /pkg folder with JS wrappers
-        run: wasm-pack build --target web
-
-      - name: Delete .gitignore from pkg
-        run: rm pkg/.gitignore
-
-      - name: Upload to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Prepare site folder
+        run: |
+          mkdir site
+          rm pkg/.gitignore
+          cp -r pkg/* site/pkg/
+          cp index.html site/
+          cp -r js/* site/js/
+          cp -r images/* site/images/
+          cp -r css/* site/css/
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
         with:
-          folder: .        # Deploy the whole root
-          branch: gh-pages # To this branch
-          clean: true      # This ensures the build is fresh
+          name: site
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: site
+
+      - name: Move files to root for deployment
+        run: |
+          mv site/* 
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
