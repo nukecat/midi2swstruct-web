@@ -31,7 +31,7 @@ jobs:
           cp -r css/* site/css/
           
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: site
           path: site
