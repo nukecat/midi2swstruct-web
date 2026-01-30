@@ -64,9 +64,10 @@ jobs:
           name: site
           path: site
 
-      - name: Move files to root for deployment
+      - name: Move files to root
         run: |
-          mv site/* 
+          mv site/* ./
+          mv site/.* ./ 2>/dev/null || true
           
       - name: Deploy to GitHub Pages
         id: deployment
