@@ -43,8 +43,6 @@ jobs:
         run: npm install -g wasm-pack
       - name: Build Rust WASM
         run: wasm-pack build --target web
-      - name: Copy WASM to site folder
-        run: cp -r pkg ./pkg
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
