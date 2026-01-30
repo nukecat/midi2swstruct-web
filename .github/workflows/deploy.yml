@@ -18,7 +18,7 @@ jobs:
 
       - name: Install wasm-pack
         run: |
-          curl https://drager.github.io/wasm-pack/installer/init.sh -sSf | sh
+          npm install -g wasm-pack
           
       - name: Build site
         run: |
