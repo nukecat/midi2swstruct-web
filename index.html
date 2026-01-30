@@ -7,7 +7,7 @@
 
 <head>
 <title>midi2swstruct-web</title>
-<link rel="stylesheet" type="text/css" href="css/style.css?v=1">
+<link rel="stylesheet" type="text/css" href="css/style.css?v=2">
 <script type="module" src="js/main.js?v=3"></script>
 <script type="module" src="js/collapsible.js?v=1"></script>
 <script type="module" src="js/slider.js?v=1"></script>
@@ -17,9 +17,6 @@
 <div class="bar">
     <div class="left">
         <h4>midi2swstruct</h4>
-    </div>
-    <div class="center">
-        <h4>webpv0.2.0-libv0.2.11</h4>
     </div>
 </div>
 <div class="container">
@@ -34,13 +31,14 @@
             with encoded MIDI data, playable within Sandbox World.
         </p>
         <div class="content-box" id="midi2swstruct-widget">
-            <label class="drop-zone" style="width: 100%">
+            <div drop-zone data-input="midi-input" data-info="midi-info">
                 Drop MIDI file here, or click to upload.
-                <input style="display: none" type="file" id="file-input" accept=".mid,.midi" />
-            </label>
-            <p style="text-align: center;">
-                <sub><b><span class="selected-file-info">Current file: None</span></b></sub>
-            </p>
+            </div>
+
+            <input type="file" id="midi-input" accept=".mid,.midi" hidden>
+            <div class="center-box">
+                <span class="special-text" id="midi-info">No file</span>
+            </div>
 
             <div class="collapsible-container">
                 <button class="collapsible-toggle collapsed">Options (Advanced) </button>
@@ -155,7 +153,7 @@
                         <div class="horizontal-slider">
                             <div class="up">
                                 <span class="label">Repeat</span>
-                                <input type="checkbox" id="repeat" value="false">
+                                <input type="checkbox" id="repeat" checked="false">
                             </div>
                         </div>
                         <br>
@@ -179,6 +177,9 @@
     <div class=right-side-panel></div>
 </div>
 <div class="bar">
+    <div class="left">
+        wepv0.2.1-libv0.2.11
+    </div>
     <div class="right">
         made by <b>nukcat</b>
     </div>

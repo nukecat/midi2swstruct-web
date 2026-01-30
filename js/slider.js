@@ -1,6 +1,6 @@
 export const sliders = {};
 
-export function initSliders() {
+document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('[data-slider]').forEach(el => {
         const key   = el.dataset.slider;
         const min   = Number(el.dataset.min);
@@ -51,7 +51,7 @@ export function initSliders() {
         // --- Store getter in sliders object ---
         sliders[key] = () => Number(numberEl.value);
     });
-}
+});
 
 export function resetSliders() {
     document.querySelectorAll('[data-slider]').forEach(el => {

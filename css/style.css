@@ -167,7 +167,7 @@ transform: scale(1.03);
 /* ==========================
  *   Drop Zone
  *   ========================== */
-.drop-zone {
+[drop-zone] {
     border: 3px dashed var(--dropbox-empty);
     border-radius: 1em;
     padding: 2em;
@@ -455,6 +455,18 @@ input[type="number"]:focus {
     box-shadow: 0 0 0.5em var(--shadow) inset;
     padding: 1em;
     border-radius: 1em;
+}
+
+.center-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em;
+}
+
+.special-text {
+    font-weight: 600;
+    opacity: 0.8;
 }
 
 /* ==========================
