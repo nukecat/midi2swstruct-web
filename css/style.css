@@ -10,7 +10,7 @@
 :root {
     --primary: #3f3f3f;
     --secondary: #3F4F44;
-    --accent: #3C4940;
+    --accent: #3C5940;
     --background: #2f2f2f;
     --shadow: black;
     --text: #eee;
@@ -42,8 +42,9 @@ p {
 
 ol {
     list-style-type: decimal;
-    padding-left: 40px;
+    padding-left: 2em;
     margin: 0 0 1em 0;
+    font-size: 1rem;
 }
 
 li {
@@ -158,7 +159,9 @@ transform: scale(1.03);
     display: flex;
     flex-direction: column;
     background-color: var(--background);
-    box-shadow: inset 0 0 0.5em var(--shadow);
+    box-shadow:
+        inset 0 0 0.5em var(--shadow),
+        0 0 1em var(--secondary);
 }
 
 /* ==========================
@@ -178,19 +181,7 @@ transform: scale(1.03);
  *   Slider
  *   ========================== */
 
-.option-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-}
-
-.option-row label {
-    flex: 0 0 120px;
-    color: var(--text);
-    font-weight: 600;
-}
-
-.option-row input[type="range"] {
+input[type="range"] {
     flex: 1;
     -webkit-appearance: none;
     height: 0.8em;
@@ -200,11 +191,11 @@ transform: scale(1.03);
     transition: background 0.2s;
 }
 
-.option-row input[type="range"]:hover {
+input[type="range"]:hover {
     background: var(--dropbox-hover);
 }
 
-.option-row input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 1.2em;
     height: 1.2em;
@@ -215,12 +206,12 @@ transform: scale(1.03);
     transition: transform 0.1s, background 0.2s;
 }
 
-.option-row input[type="range"]::-webkit-slider-thumb:hover {
+input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.2);
     background: #7fff7f;
 }
 
-.option-row input[type="range"]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
     width: 1.2em;
     height: 1.2em;
     border-radius: 50%;
@@ -229,11 +220,32 @@ transform: scale(1.03);
     cursor: pointer;
 }
 
-.option-row span {
-    flex: 0 0 40px;
-    text-align: right;
-    color: var(--text);
-    font-weight: bold;
+input[type="range"] {
+    --value: 0%;
+    background: linear-gradient(
+        to right,
+        var(--accent) 0%,
+        var(--accent) var(--value),
+        var(--dropbox-empty) var(--value),
+        var(--dropbox-empty) 100%
+    );
+}
+
+input[type="range"]::-moz-range-track {
+    height: 0.8em;
+    border-radius: 0.5em;
+    background: var(--dropbox-empty);
+}
+
+input[type="range"]::-moz-range-progress {
+    height: 0.8em;
+    border-radius: 0.5em;
+    background: var(--accent);
+}
+
+.option-row div {
+    display: flex;
+    flex-direction: row;
 }
 
 /* ==========================
@@ -344,7 +356,7 @@ input[type="number"] {
 
     width: 5em;
     padding: 0.35em 0.4em;
-    border-radius: 0.5em;
+    border-radius: 1em;
 
     border: 1px solid var(--dropbox-empty);
     background-color: var(--background);
@@ -363,7 +375,9 @@ input[type="number"] {
 
 input[type="number"]:focus {
     outline: none;
-    box-shadow: 0 0 0.6em var(--accent) inset;
+    box-shadow:
+        inset 0 0 0.5em var(--shadow),
+        0 0 0.6em var(--accent);
 }
 
 /* ==========================
@@ -380,6 +394,33 @@ input[type="number"]:focus {
  Other
  */
 
+.horizontal-slider {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.horizontal-slider .label,
+.horizontal-slider .min,
+.horizontal-slider .max {
+    font-weight: 500;
+}
+
+.horizontal-slider .up,
+.horizontal-slider .bottom {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.horizontal-slider .bottom .min,
+.horizontal-slider .bottom .max {
+
+}
+
 /* Flex utility class */
 .flex-column {
     display: flex;
@@ -387,24 +428,33 @@ input[type="number"]:focus {
     gap: 0.5em; /* spacing between children */
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
 .box {
     background-color: var(--background);
-    box-shadow: 0 0 1em var(--shadow) inset;
+    box-shadow: 0 0 0.5em var(--shadow) inset;
     padding: 1em;
     border-radius: 1em;
-}
-
-.option-row {
-    display: grid;
-    grid-template-columns: 140px 1fr auto;
-    align-items: center;
-    gap: 0.6em;
-}
-
-.option-row > label {
-    font-weight: 600;
-    color: var(--text);
-    user-select: none;
 }
 
 /* ==========================

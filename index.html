@@ -2,11 +2,14 @@
 
 <html>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <head>
 <title>midi2swstruct-web</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<script type="module" src="js/main.js"></script>
+<script type="module" src="js/main.js?v=3"></script>
 <script type="module" src="js/collapsible.js"></script>
+<script type="module" src="js/slider.js"></script>
 </head>
 
 <body>
@@ -15,14 +18,20 @@
         <h4>midi2swstruct</h4>
     </div>
     <div class="center">
-        <h4>webpv0.1.1-libv0.2.11</h4>
+        <h4>webpv0.2.0-libv0.2.11</h4>
     </div>
 </div>
 <div class="container">
     <div class=left-side-panel></div>
     <div class="content">
         <h1>Welcome</h1>
-        <p>This is a web version of midi2swstruct tool. It can convert <b>MIDI</b> files into <b>Sandbox World</b> <b>.structure</b> files. The generated structure includes a music player with encoded MIDI data, playable within Sandbox World.</p>
+        <p>
+            This is a web version of midi2swstruct tool.
+            It can convert <b>MIDI</b> files into
+            <b>Sandbox World</b> <b>.structure</b> files.
+            The generated structure includes a music player
+            with encoded MIDI data, playable within Sandbox World.
+        </p>
         <div class="content-box" id="midi2swstruct-widget">
             <label class="drop-zone" style="width: 100%">
                 Drop MIDI file here, or click to upload.
@@ -33,36 +42,122 @@
             </p>
 
             <div class="collapsible-container">
-                <button class="collapsible-toggle collapsed">Options </button>
+                <button class="collapsible-toggle collapsed">Options (Advanced) </button>
                 <div class="collapsible-content collapsed">
                     <div class="flex-column box">
-                        <div class="option-row">
-                            <label for="min-pitch">Min Pitch:</label>
-                            <input type="range" id="min-pitch" min="0" max="127" value="27">
-                            <span id="min-pitch-value">27</span>
+
+                        <div
+                            class="horizontal-slider"
+
+                            data-slider="minPitch"
+                            data-label="Minimal pitch"
+                            data-min="1"
+                            data-max="127"
+                            data-step="1"
+                            data-default="27"
+                                                        >
+                            <div class="up">
+                                <span class="label"></span>
+                                <input type="number">
+                            </div>
+                            <div class="bottom">
+                                <span class="min"></span>
+                                <input type="range">
+                                <span class="max"></span>
+                            </div>
                         </div>
-                        <div class="option-row">
-                            <label for="max-pitch">Max Pitch:</label>
-                            <input type="range" id="max-pitch" min="0" max="127" value="111">
-                            <span id="max-pitch-value">111</span>
+
+                        <div
+                            class="horizontal-slider"
+
+                            data-slider="maxPitch"
+                            data-label="Maximal pitch"
+                            data-min="1"
+                            data-max="127"
+                            data-step="1"
+                            data-default="111"
+                                                        >
+                            <div class="up">
+                                <span class="label"></span>
+                                <input type="number">
+                            </div>
+                            <div class="bottom">
+                                <span class="min"></span>
+                                <input type="range">
+                                <span class="max"></span>
+                            </div>
                         </div>
-                        <div class="option-row">
-                            <label for="min-velocity">Min Velocity:</label>
-                            <input type="range" id="min-velocity" min="0" max="127" value="1">
-                            <span id="min-velocity-value">1</span>
+
+                        <div
+                            class="horizontal-slider"
+
+                            data-slider="minVelocity"
+                            data-label="Minimal velocity"
+                            data-min="1"
+                            data-max="127"
+                            data-step="1"
+                            data-default="1"
+                                                        >
+                            <div class="up">
+                                <span class="label"></span>
+                                <input type="number">
+                            </div>
+                            <div class="bottom">
+                                <span class="min"></span>
+                                <input type="range">
+                                <span class="max"></span>
+                            </div>
                         </div>
-                        <div class="option-row">
-                            <label>Repeat:</label>
-                            <input type="checkbox" id="repeat">
+
+                        <div
+                            class="horizontal-slider"
+
+                            data-slider="notesPerValue"
+                            data-label="Notes per value"
+                            data-min="1"
+                            data-max="24"
+                            data-step="1"
+                            data-default="24"
+                                                        >
+                            <div class="up">
+                                <span class="label"></span>
+                                <input type="number">
+                            </div>
+                            <div class="bottom">
+                                <span class="min"></span>
+                                <input type="range">
+                                <span class="max"></span>
+                            </div>
                         </div>
-                        <div class="option-row">
-                            <label>Notes per Value:</label>
-                            <input type="number" id="notes-per-value" min="1" max="24" value="24">
+
+                        <div
+                            class="horizontal-slider"
+
+                            data-slider="maxEventsPerFunc"
+                            data-label="Maximal amount of events per function"
+                            data-min="512"
+                            data-max="65535"
+                            data-step="1"
+                            data-default="1024"
+                                                        >
+                            <div class="up">
+                                <span class="label"></span>
+                                <input type="number">
+                            </div>
+                            <div class="bottom">
+                                <span class="min"></span>
+                                <input type="range">
+                                <span class="max"></span>
+                            </div>
                         </div>
-                        <div class="option-row">
-                            <label>Max Events per Function:</label>
-                            <input type="number" id="max-events-per-func" min="1" value="1024">
+
+                        <div class="horizontal-slider">
+                            <div class="up">
+                                <span class="label">Repeat</span>
+                                <input type="checkbox" id="repeat" value="false">
+                            </div>
                         </div>
+                        <br>
                         <button class="btn" id="reset-btn">Reset Defaults</button>
                     </div>
                 </div>
