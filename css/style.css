@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+html {
+    color-scheme: light dark;
+}
+
 :root {
     --primary: #3f3f3f;
     --secondary: #3F4F44;
