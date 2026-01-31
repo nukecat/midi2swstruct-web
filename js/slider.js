@@ -1,6 +1,6 @@
 export const sliders = {};
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-slider]').forEach(el => {
         const key   = el.dataset.slider;
         const min   = Number(el.dataset.min);

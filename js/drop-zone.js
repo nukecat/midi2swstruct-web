@@ -10,10 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const fileInput = document.getElementById(inputId);
         const infoEl = infoId ? document.getElementById(infoId) : null;
 
-        if (!fileInput) {
-            console.warn("Drop zone missing file input:", zone);
-            return;
-        }
+        if (!fileInput) return;
+
+        fileInput.value = "";
+        zone.classList.remove("has-file");
+        if (infoEl) infoEl.textContent = "";
 
         let lastOpen = 0;
 

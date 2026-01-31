@@ -469,6 +469,10 @@ input[type="number"]:focus {
     opacity: 0.8;
 }
 
+.error {
+    color: #e66;
+}
+
 /* ==========================
  *   Media Queries
  *   ========================== */
